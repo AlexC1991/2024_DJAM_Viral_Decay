@@ -1,0 +1,144 @@
+{
+    "name": "PlayerMovement",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "2ddc5dcf-02d2-4b44-aa9d-87bbc317ec89",
+            "actions": [
+                {
+                    "name": "Forward",
+                    "type": "Button",
+                    "id": "16e22592-bdc9-4539-b0df-9359dd856983",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Backwards",
+                    "type": "Button",
+                    "id": "4f5254df-ea3d-4ef5-8c2c-0a3729f1bec3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "eb75f398-791a-4122-ab49-34e1837ff048",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "0a902b55-13d0-41df-9322-17472ee000f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a2179dab-1a52-4cc2-a81b-f0fc629c3e39",
+                    "path": "<Keyboard>/d",
+                    "interactions": "Press,Hold",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b01631b4-0c10-4a10-b041-a9a71dd65e74",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "Hold,Press",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "004d177b-2849-486b-a0e5-91ff5c248ee7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "Press,Hold",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Backwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41220e9f-04c7-4f15-b7f5-6d76fcfe4f0d",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "Hold,Press",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Backwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68f9cfa1-69fc-447b-9c47-e3c7e16c2440",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ec2c758-5a09-4a10-a64d-4f572c1e08c7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe3ee443-388a-4f6e-8f07-0bb9e7bbd591",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "Hold,Press",
+                    "processors": "",
+                    "groups": "BaseControllerMovement",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e960ac35-c6b4-487d-b423-8711b4269ed6",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press,Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "BaseControllerMovement",
+            "bindingGroup": "BaseControllerMovement",
+            "devices": []
+        }
+    ]
+}
