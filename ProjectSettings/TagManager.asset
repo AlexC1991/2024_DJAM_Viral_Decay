@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SpawnedGood
+  - GasCloud
+  - Meds
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Spawned Goods
   - Water
   - UI
   - 

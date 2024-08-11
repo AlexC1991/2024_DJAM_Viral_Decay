@@ -11,8 +11,7 @@ public class ScriptableAudioFile : ScriptableObject
     [HideInInspector] public bool loopSound;
 
     // Add an AudioSource field to the ScriptableObject
-    [System.NonSerialized]
-    private AudioSource audioSource;
+    [System.NonSerialized] public AudioSource audioSource;
     // Play the audio using the internal AudioSource
     public void PlayAudio()
     {

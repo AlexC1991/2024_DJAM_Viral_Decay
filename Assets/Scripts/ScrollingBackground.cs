@@ -1,24 +1,29 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ViralDecay
 {
     public class ScrollingBackground : MonoBehaviour
     {
+        private float scrollPosition = 0f;
         
-        [Range(-1,1)] public float speed;
-        private float offset;
-        private Material mat;
-        private static readonly int MainTex = Shader.PropertyToID("_MainTex");
-
-        private void Start()
+        public IEnumerator ScrollingForwards()
         {
-            mat = GetComponent<Renderer>().material;
+            float scrollSpeed = 0.5f;
+            scrollPosition += scrollSpeed * Time.deltaTime;
+            gameObject.GetComponent<RawImage>().uvRect = new Rect(scrollPosition, 0, 1, 1);
+            yield return null;
         }
         
-        void Update()
+        public IEnumerator ScrollingBackwards()
         {
-            offset += Time.deltaTime * speed;
-            mat.SetTextureOffset(MainTex, new Vector2(offset, 0));
+            float scrollSpeed = -0.5f;
+            scrollPosition += scrollSpeed * Time.deltaTime;
+            gameObject.GetComponent<RawImage>().uvRect = new Rect(scrollPosition, 0, 1, 1);
+            yield return null;
         }
     }
+    
+    
 }

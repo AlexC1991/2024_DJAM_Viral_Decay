@@ -1,6 +1,5 @@
-using System;
 using System.Collections;
-using Unity.Mathematics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +8,9 @@ namespace ViralDecay
     public class TwoDCharacterMovement : MonoBehaviour
     {
         [SerializeField] private InputActionAsset controllerSettings;
+        [SerializeField] private TextMeshProUGUI distanceText;
+        private SoundManager _soundManager;
+        private GasCloud _gasCloud;
         public float characterWalkSpeed;
         [SerializeField] private float characterJumpingForce;
         private InputAction _characterIAC;
@@ -22,11 +24,13 @@ namespace ViralDecay
         private InputAction _backwardsAction;
         private InputAction _runAction;
         private ScrollingBackground _sB;
+        public float _distanceTravelled = 0;
         [HideInInspector] public float moveInput;
 
 
         private void Awake()
         {
+            _soundManager = FindObjectOfType<SoundManager>();
             _characterRD = GetComponent<Rigidbody2D>();
             characterRunSpeed = characterWalkSpeed * 2;
             _jumpAction = controllerSettings.FindActionMap("Movement").FindAction("Jump");
@@ -34,11 +38,13 @@ namespace ViralDecay
             _backwardsAction = controllerSettings.FindActionMap("Movement").FindAction("Backwards");
             _runAction = controllerSettings.FindActionMap("Movement").FindAction("Run");
             _sB = FindObjectOfType<ScrollingBackground>();
+            _gasCloud = FindObjectOfType<GasCloud>();
         }
 
         private void Start()
         {
             StartCoroutine(CharacterMovementCheck());
+            distanceText.text = "Distance Travelled: " + _distanceTravelled.ToString("00");
         }
 
         private void OnEnable()
@@ -71,11 +77,21 @@ namespace ViralDecay
                 
                 if (_forwardAction.triggered || _forwardAction.ReadValue<float>() > 0)
                 {
-                    //_sB.ScollingForwards();
+                    StartCoroutine(_sB.ScrollingForwards());
+                    StartCoroutine(_soundManager.PlayerWalking());
+                    _gasCloud.currentScaleX -= 0.008f;
+                    _gasCloud.currentScaleY -= 0.008f;
+                    _distanceTravelled += 0.1f * Time.deltaTime;
+                    _distanceTravelled = Mathf.Clamp(_distanceTravelled, 0, float.MaxValue);
+                    distanceText.text = "Distance Travelled: " + _distanceTravelled.ToString("F2");
                     
                     if (_runAction.triggered  && !_isJumping || _runAction.ReadValue<float>() > 0 && !_isJumping)
                     {
+                        StartCoroutine(_soundManager.PlayerWalking());
                         _characterRD.velocity = new Vector2(characterRunSpeed, _characterRD.velocity.y);
+                        _distanceTravelled += 0.2f * Time.deltaTime;
+                        _distanceTravelled = Mathf.Clamp(_distanceTravelled, 0, float.MaxValue);
+                        distanceText.text = "Distance Travelled: " + _distanceTravelled.ToString("F2");
                     }
                     else
                         _characterRD.velocity = new Vector2(characterWalkSpeed, _characterRD.velocity.y);
@@ -84,11 +100,19 @@ namespace ViralDecay
                 
                 if (_backwardsAction.triggered && !_isJumping || _backwardsAction.ReadValue<float>() > 0 && !_isJumping)
                 {
-                   // _sB.ScrollBackwards();
+                    StartCoroutine(_sB.ScrollingBackwards());
+                    StartCoroutine(_soundManager.PlayerWalking());
+                    _distanceTravelled -= 0.1f * Time.deltaTime;
+                    _distanceTravelled = Mathf.Clamp(_distanceTravelled, 0, float.MaxValue);
+                    distanceText.text = "Distance Travelled: " + _distanceTravelled.ToString("F2");
                     
                     if (_runAction.triggered || _runAction.ReadValue<float>() > 0)
                     {
+                        StartCoroutine(_soundManager.PlayerWalking());
                         _characterRD.velocity = new Vector2(-characterRunSpeed, _characterRD.velocity.y);
+                        _distanceTravelled -= 0.2f * Time.deltaTime;
+                        _distanceTravelled = Mathf.Clamp(_distanceTravelled, 0, float.MaxValue);
+                        distanceText.text = "Distance Travelled: " + _distanceTravelled.ToString("F2");
                     }
                     else
                         _characterRD.velocity = new Vector2(-characterWalkSpeed, _characterRD.velocity.y);
